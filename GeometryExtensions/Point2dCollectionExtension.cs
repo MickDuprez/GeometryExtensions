@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#if BRX
+using Teigha.Geometry;
+#elif ARX
 using Autodesk.AutoCAD.Geometry;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {

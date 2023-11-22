@@ -1,10 +1,17 @@
-﻿using Autodesk.AutoCAD.DatabaseServices;
+﻿#if BRX
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+using AcRx = Teigha.Runtime;
+#elif ARX
+using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
+using AcRx = Autodesk.AutoCAD.Runtime;
+#endif
 
 using System;
 using System.Collections.Generic;
 
-using AcRx = Autodesk.AutoCAD.Runtime;
+
 
 namespace Gile.AutoCAD.Geometry
 {
@@ -18,7 +25,7 @@ namespace Gile.AutoCAD.Geometry
         /// </summary>
         /// <param name="pl">The instance to which this method applies.</param>
         /// <returns>The list of vertices.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eNoActiveTransactions is thrown if the lethod is called outside of a Transaction.</exception>
         public static List<Vertex2d> GetVertices(this Polyline2d pl)
         {

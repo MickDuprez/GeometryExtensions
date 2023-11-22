@@ -1,6 +1,12 @@
-﻿using Autodesk.AutoCAD.BoundaryRepresentation;
+﻿#if BRX
+using AcBrep = Teigha.BoundaryRepresentation;
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+#elif ARX
+using AcBrep = Autodesk.AutoCAD.BoundaryRepresentation;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
+#endif
 
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +51,7 @@ namespace Gile.AutoCAD.Geometry
         /// <returns>Curve collection.</returns>
         public static IEnumerable<Curve> GetCurves(this Region region)
         {
-            using (var brep = new Brep(region))
+            using (var brep = new AcBrep.Brep(region))
             {
                 var loops = brep.Faces.SelectMany(face => face.Loops);
                 foreach (var loop in loops)
@@ -84,7 +90,7 @@ namespace Gile.AutoCAD.Geometry
         {
             var plane = new Plane(Point3d.Origin, region.Normal);
 
-            using (var brep = new Brep(region))
+            using (var brep = new AcBrep.Brep(region))
             {
                 foreach (var complex in brep.Complexes)
                 {
@@ -144,7 +150,7 @@ namespace Gile.AutoCAD.Geometry
                                     break;
                             }
                         }
-                        if (loop.LoopType == LoopType.LoopExterior)
+                        if (loop.LoopType == AcBrep.LoopType.LoopExterior)
                             yield return (HatchLoopTypes.External, edgePtrCollection, edgeTypeCollection);
                         else
                             yield return (HatchLoopTypes.Default, edgePtrCollection, edgeTypeCollection);
@@ -159,19 +165,19 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="region">The instance to which this method applies.</param>
         /// <param name="point">The point to be evaluated.</param>
         /// <returns>The PointContainment value.</returns>
-        public static PointContainment GetPointContainment(this Region region, Point3d point)
+        public static AcBrep.PointContainment GetPointContainment(this Region region, Point3d point)
         {
-            using (Brep brep = new Brep(region))
-            using (BrepEntity entity = brep.GetPointContainment(point, out PointContainment result))
+            using (AcBrep.Brep brep = new AcBrep.Brep(region))
+            using (AcBrep.BrepEntity entity = brep.GetPointContainment(point, out AcBrep.PointContainment result))
             {
                 switch (entity)
                 {
-                    case Autodesk.AutoCAD.BoundaryRepresentation.Face _:
-                        return PointContainment.Inside;
-                    case Edge _:
-                        return PointContainment.OnBoundary;
+                    case AcBrep.Face _:
+                        return AcBrep.PointContainment.Inside;
+                    case AcBrep.Edge _:
+                        return AcBrep.PointContainment.OnBoundary;
                     default:
-                        return PointContainment.Outside;
+                        return AcBrep.PointContainment.Outside;
                 }
             }
         }

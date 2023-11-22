@@ -1,4 +1,8 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿#if BRX
+using Teigha.Geometry;
+#elif ARX
+using Autodesk.AutoCAD.Geometry;
+#endif
 
 using System.Collections.Generic;
 

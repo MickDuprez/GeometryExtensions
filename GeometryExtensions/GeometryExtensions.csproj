@@ -15,45 +15,48 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ARX-Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ARX</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ARX-Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;ARX</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\GeometryExtensions.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BRX-Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\BRX-Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BRX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BRX-Release|AnyCPU'">
+    <OutputPath>bin\BRX-Release\</OutputPath>
+    <DefineConstants>TRACE;BRX</DefineConstants>
+    <DocumentationFile>bin\Release\GeometryExtensions.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AcCoreMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcCoreMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AcDbMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcDbMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="acdbmgdbrep">
-      <HintPath>C:\ObjectARX 2017\inc\acdbmgdbrep.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AcMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AcMPolygonMGD">
-      <HintPath>F:\Program Files\Autodesk\AutoCAD 2024\AcMPolygonMGD.dll</HintPath>
+    <Reference Include="BrxMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Bricsys\BricsCAD V24 en_US\BrxMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -63,6 +66,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TD_Mgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Bricsys\BricsCAD V24 en_US\TD_Mgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TD_MgdBrep">
+      <HintPath>..\..\..\..\..\..\Program Files\Bricsys\BricsCAD V24 en_US\TD_MgdBrep.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircularArc2dExtension.cs" />
@@ -95,6 +106,11 @@
     <Compile Include="Vector2dExtension.cs" />
     <Compile Include="Vector3dExtension.cs" />
     <Compile Include="ViewportExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,16 @@
-﻿using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.EditorInput;
+﻿#if BRX
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+using Bricscad.EditorInput;
+using AcRx = Teigha.Runtime;
+#elif ARX
+using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
-
+using Autodesk.AutoCAD.EditorInput;
 using AcRx = Autodesk.AutoCAD.Runtime;
+#endif
+
+
 
 namespace Gile.AutoCAD.Geometry
 {
@@ -69,9 +77,9 @@ namespace Gile.AutoCAD.Geometry
         /// </summary>
         /// <param name="ed">The instance to which this method applies.</param>
         /// <returns>The DCS to PSDCS transformation matrix.</returns>
-        /// <exception cref=" Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref=" AcRx.Exception">
         /// eNotInPaperSpace is thrown if this method is called form Model Space.</exception>
-        /// <exception cref=" Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref=" AcRx.Exception">
         /// eCannotChangeActiveViewport is thrown if there is none floating viewport in the current layout.</exception>
         public static Matrix3d DCS2PSDCS(this Editor ed)
         {
@@ -104,9 +112,9 @@ namespace Gile.AutoCAD.Geometry
         /// </summary>
         /// <param name="ed">The instance to which this method applies.</param>
         /// <returns>The PSDCS to DCS transformation matrix.</returns>
-        /// <exception cref=" Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref=" AcRx.Exception">
         /// eNotInPaperSpace is thrown if this method is called form Model Space.</exception>
-        /// <exception cref=" Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref=" AcRx.Exception">
         /// eCannotChangeActiveViewport is thrown if there is none floating viewport in the current layout.</exception>
         public static Matrix3d PSDCS2DCS(this Editor ed)
         {

@@ -1,5 +1,10 @@
 ﻿using System;
+
+#if BRX
+using Teigha.Geometry;
+#elif ARX
 using Autodesk.AutoCAD.Geometry;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {

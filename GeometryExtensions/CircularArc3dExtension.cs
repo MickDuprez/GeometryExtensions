@@ -1,5 +1,12 @@
 ﻿using System;
+#if BRX
+using Teigha.Geometry;
+
+using AcRx = Teigha.Runtime;
+#elif ARX
 using Autodesk.AutoCAD.Geometry;
+using AcRx = Autodesk.AutoCAD.Runtime;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {
@@ -18,7 +25,7 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="arc">The instance to which the method applies.</param>
         /// <param name="pt">The Point2d to which tangents are searched.</param>
         /// <returns>An array of LineSegement3d representing the tangents (2) or <c>null</c> if there is none.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eNonCoplanarGeometry is thrown if the objects do not lies on the same plane.</exception>
         public static LineSegment3d[] GetTangentsTo(this CircularArc3d arc, Point3d pt)
         {
@@ -27,8 +34,8 @@ namespace Gile.AutoCAD.Geometry
             Matrix3d WCS2OCS = Matrix3d.WorldToPlane(normal);
             double elevation = arc.Center.TransformBy(WCS2OCS).Z;
             if (Math.Abs(elevation - pt.TransformBy(WCS2OCS).Z) < Tolerance.Global.EqualPoint)
-                throw new Autodesk.AutoCAD.Runtime.Exception(
-                    Autodesk.AutoCAD.Runtime.ErrorStatus.NonCoplanarGeometry);
+                throw new AcRx.Exception(
+                    AcRx.ErrorStatus.NonCoplanarGeometry);
 
             Plane plane = new Plane(Point3d.Origin, normal);
             Matrix3d OCS2WCS = Matrix3d.PlaneToWorld(plane);
@@ -59,7 +66,7 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="other">The CircularArc2d to which searched for tangents.</param>
         /// <param name="flags">An enum value specifying which type of tangent is returned.</param>
         /// <returns>An array of LineSegment3d representing the tangents (maybe 2 or 4) or <c>null</c> if there is none.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eNonCoplanarGeometry is thrown if the objects do not lies on the same plane.</exception>
         public static LineSegment3d[] GetTangentsTo(this CircularArc3d arc, CircularArc3d other, TangentType flags)
         {
@@ -69,8 +76,8 @@ namespace Gile.AutoCAD.Geometry
             double elevation = arc.Center.TransformBy(WCS2OCS).Z;
             if (!(normal.IsParallelTo(other.Normal) &&
                 Math.Abs(elevation - other.Center.TransformBy(WCS2OCS).Z) < Tolerance.Global.EqualPoint))
-                throw new Autodesk.AutoCAD.Runtime.Exception(
-                    Autodesk.AutoCAD.Runtime.ErrorStatus.NonCoplanarGeometry);
+                throw new AcRx.Exception(
+                    AcRx.ErrorStatus.NonCoplanarGeometry);
 
             Plane plane = new Plane(Point3d.Origin, normal);
             CircularArc2d ca2d1 = new CircularArc2d(arc.Center.Convert2d(plane), arc.Radius);

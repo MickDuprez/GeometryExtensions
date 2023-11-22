@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
+#if BRX
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+#elif ARX
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {

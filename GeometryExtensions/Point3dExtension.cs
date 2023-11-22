@@ -1,9 +1,18 @@
 ﻿using System;
-using Autodesk.AutoCAD.ApplicationServices;
+
+#if BRX
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+using Bricscad.EditorInput;
+using Bricscad.ApplicationServices;
+using AcRx = Teigha.Runtime;
+#elif ARX
 using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
+using Autodesk.AutoCAD.EditorInput;
+using Autodesk.AutoCAD.ApplicationServices;
 using AcRx = Autodesk.AutoCAD.Runtime;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {
@@ -96,7 +105,7 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="from">The origin coordinate system flag.</param>
         /// <param name="to">The destination coordinate system flag.</param>
         /// <returns>The corresponding Point3d.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eInvalidInput thrown of 3 (CoordSystem.PSDCS) is used with another flag than 2 (CoordSystem.DCS).</exception>
         public static Point3d Trans(this Point3d pt, int from, int to)
         {
@@ -112,7 +121,7 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="from">The origin coordinate system flag.</param>
         /// <param name="to">The destination coordinate system flag.</param>
         /// <returns>The corresponding Point3d.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eInvalidInput thrown of 3 (CoordSystem.PSDCS) is used with another flag than 2 (CoordSystem.DCS).</exception>
         public static Point3d Trans(this Point3d pt, Editor ed, int from, int to)
         {
@@ -142,9 +151,9 @@ namespace Gile.AutoCAD.Geometry
         /// <param name="from">The origin coordinate system.</param>
         /// <param name="to">The destination coordinate system.</param>
         /// <returns>The corresponding Point3d.</returns>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eInvalidInput thrown of 3 (CoordSystem.PSDCS) is used with another flag than 2 (CoordSystem.DCS).</exception>
-        /// <exception cref="Autodesk.AutoCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eInvalidInput est lancée si CoordSystem.PSDCS est utilisé avec un autre drapeau que CoordSystem.DCS.</exception>
         public static Point3d Trans(this Point3d pt, Editor ed, CoordSystem from, CoordSystem to)
         {

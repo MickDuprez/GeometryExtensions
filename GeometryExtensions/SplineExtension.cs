@@ -1,6 +1,13 @@
-﻿using Autodesk.AutoCAD.DatabaseServices;
+﻿
+#if BRX
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+using AcRx = Teigha.Runtime;
+#elif ARX
+using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using AcRx = Autodesk.AutoCAD.Runtime;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {

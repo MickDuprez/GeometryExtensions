@@ -1,8 +1,16 @@
 ﻿using System;
+
+#if BRX
+using Bricscad.ApplicationServices;
+using Teigha.DatabaseServices;
+using Teigha.Geometry;
+using Teigha.Runtime;
+#elif ARX
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
+#endif
 
 namespace Gile.AutoCAD.Geometry
 {
