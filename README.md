@@ -1,4 +1,8 @@
-# GeometryExtensions
+# GeometryExtensions 
+Forked from https://github.com/gileCAD/GeometryExtensions to make a version available for AutoCAD and BricsCAD
+There are conditional symbols defined for each build of Debug and Release to suit AutoCAD or BricsCAD, choose the build
+you need for your platform.
+
 ### AutoCAD Geometry Helpers.
 
 Reference this assembly in AutoCAD .NET projects setting the Copy Locale property to True.
